@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 app.post('/webhook/twilio/entrante', async (req, res) => {
   const { From, To, CallSid } = req.body;
   console.log(`Llamada entrante: ${From} → ${To}`);
-  sesiones.set(CallSid, { callerPhone: From, trackingNum: To, startTime: new Date() });
+  sesiones.set(CallSid, { callerPhone: From, trackingNum: To });
   const twiml = new VoiceResponse();
   twiml.say({ language: 'es-MX' }, 'Un momento por favor.');
   const dial = twiml.dial({
@@ -33,10 +33,9 @@ app.post('/webhook/twilio/entrante', async (req, res) => {
 
 app.post('/webhook/twilio/estado', async (req, res) => {
   const { CallSid, CallStatus, CallDuration } = req.body;
-  console.log(`Llamada termino: ${CallStatus} - ${CallDuration}s`);
   const sesion = sesiones.get(CallSid) || {};
   const callerPhone = sesion.callerPhone || '+10000000000';
-  console.log(`Numero del lead: ${callerPhone}`);
+  console.log(`Llamada: ${CallStatus} ${CallDuration}s - Lead: ${callerPhone}`);
   const fub = axios.create({
     baseURL: 'https://api.followupboss.com/v1',
     auth: { username: process.env.FUB_USER_API_KEY, password: '' },
@@ -47,25 +46,20 @@ app.post('/webhook/twilio/estado', async (req, res) => {
       source: `Llamada - ${sesion.trackingNum || 'Desconocido'}`,
       system: process.env.FUB_SYSTEM_NAME || 'MiSistema',
       type: 'General Inquiry',
-      person: {
-        phones: [{ value: callerPhone, type: 'mobile' }],
-      },
+      person: { phones: [{ value: callerPhone, type: 'mobile' }] },
     });
     const personId = evento.data.id;
-    console.log(`Lead en FUB: ID ${personId}`);
-    const mins = Math.floor((parseInt(CallDuration) || 0) / 60);
-    const secs = (parseInt(CallDuration) || 0) % 60;
-    const llamada = await fub.post('/calls', {
+    const dur = parseInt(CallDuration) || 0;
+    await fub.post('/calls', {
       personId,
-      duration: parseInt(CallDuration) || 0,
+      duration: dur,
       outcome: CallStatus === 'completed' ? 'Interested' : 'No Answer',
-      note: `Llamada ${CallStatus === 'completed' ? 'conectada' : 'sin respuesta'} - ${mins}m ${secs}s`,
+      note: `Llamada ${CallStatus} - ${Math.floor(dur/60)}m ${dur%60}s`,
       phone: callerPhone,
     });
-    sesiones.set(CallSid, { ...sesion, fubCallId: llamada.data.id });
-    console.log(`Llamada registrada en FUB: ID ${llamada.data.id}`);
+    console.log(`Registrado en FUB OK - Lead ${personId}`);
   } catch (err) {
-    console.error('Error FUB:', err.message, JSON.stringify(err.response?.data));
+    console.error('Error:', err.message, JSON.stringify(err.response?.data));
   }
   res.sendStatus(200);
 });
@@ -81,7 +75,6 @@ app.post('/webhook/twilio/grabacion', async (req, res) => {
         headers: { 'Content-Type': 'application/json' },
       });
       await fub.put(`/calls/${sesion.fubCallId}`, { recordingUrl: `${RecordingUrl}.mp3` });
-      console.log('Grabacion agregada a FUB');
     } catch (err) {
       console.error('Error grabacion:', err.message);
     }
