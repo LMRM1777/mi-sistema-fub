@@ -32,10 +32,11 @@ app.post('/webhook/twilio/entrante', async (req, res) => {
 });
 
 app.post('/webhook/twilio/estado', async (req, res) => {
-  const { CallSid, CallStatus, CallDuration, From, To } = req.body;
+  const { CallSid, CallStatus, CallDuration } = req.body;
   console.log(`Llamada termino: ${CallStatus} - ${CallDuration}s`);
   const sesion = sesiones.get(CallSid) || {};
-  const callerPhone = sesion.callerPhone || From || '+10000000000';
+  const callerPhone = sesion.callerPhone || '+10000000000';
+  console.log(`Numero del lead: ${callerPhone}`);
   const fub = axios.create({
     baseURL: 'https://api.followupboss.com/v1',
     auth: { username: process.env.FUB_USER_API_KEY, password: '' },
@@ -43,22 +44,22 @@ app.post('/webhook/twilio/estado', async (req, res) => {
   });
   try {
     const evento = await fub.post('/events', {
-      source: `Llamada - ${sesion.trackingNum || To || 'Desconocido'}`,
+      source: `Llamada - ${sesion.trackingNum || 'Desconocido'}`,
       system: process.env.FUB_SYSTEM_NAME || 'MiSistema',
       type: 'General Inquiry',
       person: {
-        phone: callerPhone,
         phones: [{ value: callerPhone, type: 'mobile' }],
       },
     });
     const personId = evento.data.id;
+    console.log(`Lead creado/encontrado en FUB: ID ${personId}`);
     const mins = Math.floor((parseInt(CallDuration) || 0) / 60);
     const secs = (parseInt(CallDuration) || 0) % 60;
     const llamada = await fub.post('/calls', {
       personId,
       duration: parseInt(CallDuration) || 0,
       outcome: CallStatus === 'completed' ? 'Connected' : 'No Answer',
-      note: `Llamada ${CallStatus === 'completed' ? 'conectada' : 'sin respuesta'}\nDuracion: ${mins}m ${secs}s`,
+      note: `Llamada ${CallStatus === 'completed' ? 'conectada' : 'sin respuesta'} - ${mins}m ${secs}s`,
     });
     sesiones.set(CallSid, { ...sesion, fubCallId: llamada.data.id });
     console.log(`Llamada registrada en FUB: ID ${llamada.data.id}`);
@@ -70,7 +71,6 @@ app.post('/webhook/twilio/estado', async (req, res) => {
 
 app.post('/webhook/twilio/grabacion', async (req, res) => {
   const { CallSid, RecordingUrl } = req.body;
-  console.log(`Grabacion lista: ${RecordingUrl}`);
   const sesion = sesiones.get(CallSid);
   if (sesion?.fubCallId) {
     try {
