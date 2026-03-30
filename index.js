@@ -32,9 +32,10 @@ app.post('/webhook/twilio/entrante', async (req, res) => {
 });
 
 app.post('/webhook/twilio/estado', async (req, res) => {
-  const { CallSid, CallStatus, CallDuration, From } = req.body;
-  console.log(`Llamada terminó: ${CallStatus} - ${CallDuration}s`);
+  const { CallSid, CallStatus, CallDuration, From, To } = req.body;
+  console.log(`Llamada termino: ${CallStatus} - ${CallDuration}s`);
   const sesion = sesiones.get(CallSid) || {};
+  const callerPhone = From || sesion.callerPhone || '';
   const fub = axios.create({
     baseURL: 'https://api.followupboss.com/v1',
     auth: { username: process.env.FUB_USER_API_KEY, password: '' },
@@ -42,10 +43,13 @@ app.post('/webhook/twilio/estado', async (req, res) => {
   });
   try {
     const evento = await fub.post('/events', {
-      source: `Llamada - ${sesion.trackingNum || To}`,
+      source: `Llamada - ${sesion.trackingNum || To || 'Desconocido'}`,
       system: process.env.FUB_SYSTEM_NAME || 'MiSistema',
       type: 'General Inquiry',
-      person: { phones: [{ value: From || sesion.callerPhone, type: 'mobile' }] },phone: From || sesion.callerPhone
+      person: {
+        phone: callerPhone,
+        phones: [{ value: callerPhone, type: 'mobile' }],
+      },
     });
     const personId = evento.data.id;
     const mins = Math.floor((parseInt(CallDuration) || 0) / 60);
@@ -78,7 +82,7 @@ app.post('/webhook/twilio/grabacion', async (req, res) => {
       await fub.put(`/calls/${sesion.fubCallId}`, { recordingUrl: `${RecordingUrl}.mp3` });
       console.log('Grabacion agregada a FUB');
     } catch (err) {
-      console.error('Error grabacion FUB:', err.message);
+      console.error('Error grabacion:', err.message);
     }
   }
   res.sendStatus(200);
@@ -87,5 +91,3 @@ app.post('/webhook/twilio/grabacion', async (req, res) => {
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Servidor en puerto ${PORT}`);
 });
-  
-      
