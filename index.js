@@ -58,7 +58,7 @@ app.post('/webhook/twilio/estado', async (req, res) => {
     const llamada = await fub.post('/calls', {
       personId,
       duration: parseInt(CallDuration) || 0,
-      outcome: CallStatus === 'completed' ? 'Connected' : 'No Answer',
+      outcome: CallStatus === 'completed' ? 'Interested' : 'No Answer',
       note: `Llamada ${CallStatus === 'completed' ? 'conectada' : 'sin respuesta'} - ${mins}m ${secs}s`,
       phone: callerPhone,
     });
