@@ -56,6 +56,7 @@ app.post('/webhook/twilio/estado', async (req, res) => {
       outcome: CallStatus === 'completed' ? 'Interested' : 'No Answer',
       note: `Llamada ${CallStatus} - ${Math.floor(dur/60)}m ${dur%60}s`,
       phone: callerPhone,
+      isIncoming: 1,
     });
     console.log(`Registrado en FUB OK - Lead ${personId}`);
   } catch (err) {
