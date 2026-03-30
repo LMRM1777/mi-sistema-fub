@@ -2,10 +2,10 @@
   "name": "mi-sistema-fub",
   "version": "1.0.0",
   "description": "Sistema de llamadas y action plans integrado con Follow Up Boss",
-  "main": "src/index.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "start": "node index.js",
+    "start": "node index.js",
     "worker": "node src/workers/fub.worker.js",
     "dev": "node --watch src/index.js"
   },
