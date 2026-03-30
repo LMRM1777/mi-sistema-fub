@@ -10,6 +10,10 @@ app.use(express.urlencoded({ extended: true }));
 
 const VoiceResponse = twilio.twiml.VoiceResponse;
 const sesiones = new Map();
+const twilioClient = twilio(
+  process.env.TWILIO_ACCOUNT_SID,
+  process.env.TWILIO_AUTH_TOKEN
+);
 
 app.get('/', (req, res) => {
   res.json({ sistema: 'Mi Sistema FUB', estado: 'activo' });
@@ -59,6 +63,17 @@ app.post('/webhook/twilio/estado', async (req, res) => {
       isIncoming: 1,
     });
     console.log(`Registrado en FUB OK - Lead ${personId}`);
+
+    // Mandar SMS automatico al lead
+    if (callerPhone !== '+10000000000') {
+      await twilioClient.messages.create({
+        body: `Hola, soy Javier de Lake Michigan Realty. Gracias por llamar, te contactare pronto.`,
+        from: process.env.TWILIO_TRACKING_NUMBER,
+        to: callerPhone,
+      });
+      console.log(`SMS enviado a ${callerPhone}`);
+    }
+
   } catch (err) {
     console.error('Error:', err.message, JSON.stringify(err.response?.data));
   }
