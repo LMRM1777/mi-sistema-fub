@@ -45,7 +45,7 @@ app.post('/webhook/twilio/estado', async (req, res) => {
       source: `Llamada - ${sesion.trackingNum || To}`,
       system: process.env.FUB_SYSTEM_NAME || 'MiSistema',
       type: 'General Inquiry',
-      person: { phones: [{ value: From || sesion.callerPhone, type: 'mobile' }] },
+      person: { phones: [{ value: From || sesion.callerPhone, type: 'mobile' }] },phone: From || sesion.callerPhone
     });
     const personId = evento.data.id;
     const mins = Math.floor((parseInt(CallDuration) || 0) / 60);
