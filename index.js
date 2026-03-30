@@ -77,8 +77,7 @@ app.post('/webhook/twilio/estado', async (req, res) => {
     sesiones.set(CallSid, { ...sesion, fubCallId: llamada.data.id });
     console.log(`Llamada registrada en FUB: ID ${llamada.data.id}`);
   } catch (err) {
-    console.error('Error registrando en FUB:', err.message);
-  }
+    console.error('Error registrando en FUB:', err.message, JSON.stringify(err.response?.data));
 
   res.sendStatus(200);
 });
