@@ -1,6 +1,7 @@
 import express from 'express';
 import twilio from 'twilio';
 import axios from 'axios';
+import Bull from 'bull';
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -10,10 +11,40 @@ app.use(express.urlencoded({ extended: true }));
 
 const VoiceResponse = twilio.twiml.VoiceResponse;
 const sesiones = new Map();
+
 const twilioClient = twilio(
   process.env.TWILIO_ACCOUNT_SID,
   process.env.TWILIO_AUTH_TOKEN
 );
+
+const smsQueue = new Bull('sms-drip', {
+  redis: process.env.REDIS_URL,
+});
+
+// Calcular delay hasta una hora especifica del dia siguiente
+function delayHastaHora(diasDespues, hora) {
+  const ahora = new Date();
+  const objetivo = new Date();
+  objetivo.setDate(ahora.getDate() + diasDespues);
+  objetivo.setHours(hora, 0, 0, 0);
+  return objetivo.getTime() - ahora.getTime();
+}
+
+const DRIP_MESSAGES = [
+  { delay: () => delayHastaHora(1, 12), msg: 'Hola, soy Javier. Pudiste hablar con alguien de mi equipo? Estoy aqui para ayudarte.' },
+  { delay: () => delayHastaHora(3, 10), msg: 'Hola de nuevo, tienes alguna pregunta sobre propiedades en Michigan?' },
+  { delay: () => delayHastaHora(7, 9),  msg: 'Hola, quiero asegurarme de que recibas la mejor atencion. Cuando es buen momento para hablar?' },
+];
+
+smsQueue.process(async (job) => {
+  const { to, message } = job.data;
+  await twilioClient.messages.create({
+    body: message,
+    from: process.env.TWILIO_TRACKING_NUMBER,
+    to,
+  });
+  console.log(`SMS drip enviado a ${to}`);
+});
 
 app.get('/', (req, res) => {
   res.json({ sistema: 'Mi Sistema FUB', estado: 'activo' });
@@ -64,14 +95,21 @@ app.post('/webhook/twilio/estado', async (req, res) => {
     });
     console.log(`Registrado en FUB OK - Lead ${personId}`);
 
-    // Mandar SMS automatico al lead
     if (callerPhone !== '+10000000000') {
       await twilioClient.messages.create({
-        body: `Hola, soy Javier de Lake Michigan Realty. Gracias por llamar, te contactare pronto.`,
+        body: 'Hola, soy Javier de Lake Michigan Realty. Gracias por llamar, te contactare pronto.',
         from: process.env.TWILIO_TRACKING_NUMBER,
         to: callerPhone,
       });
-      console.log(`SMS enviado a ${callerPhone}`);
+      console.log(`SMS inmediato enviado a ${callerPhone}`);
+
+      for (const drip of DRIP_MESSAGES) {
+        await smsQueue.add(
+          { to: callerPhone, message: drip.msg },
+          { delay: drip.delay() }
+        );
+      }
+      console.log(`Drip programado para ${callerPhone}`);
     }
 
   } catch (err) {
