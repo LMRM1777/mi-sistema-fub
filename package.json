@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "start": "node index.js",
     "worker": "node src/workers/fub.worker.js",
     "dev": "node --watch src/index.js"
   },
