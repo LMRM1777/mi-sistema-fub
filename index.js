@@ -35,7 +35,7 @@ app.post('/webhook/twilio/estado', async (req, res) => {
   const { CallSid, CallStatus, CallDuration, From, To } = req.body;
   console.log(`Llamada termino: ${CallStatus} - ${CallDuration}s`);
   const sesion = sesiones.get(CallSid) || {};
-  const callerPhone = From || sesion.callerPhone || '';
+  const callerPhone = sesion.callerPhone || From || '+10000000000';
   const fub = axios.create({
     baseURL: 'https://api.followupboss.com/v1',
     auth: { username: process.env.FUB_USER_API_KEY, password: '' },
