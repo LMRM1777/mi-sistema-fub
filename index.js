@@ -60,6 +60,7 @@ app.post('/webhook/twilio/estado', async (req, res) => {
       duration: parseInt(CallDuration) || 0,
       outcome: CallStatus === 'completed' ? 'Connected' : 'No Answer',
       note: `Llamada ${CallStatus === 'completed' ? 'conectada' : 'sin respuesta'} - ${mins}m ${secs}s`,
+      phone: callerPhone,
     });
     sesiones.set(CallSid, { ...sesion, fubCallId: llamada.data.id });
     console.log(`Llamada registrada en FUB: ID ${llamada.data.id}`);
