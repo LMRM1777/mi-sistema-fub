@@ -52,7 +52,7 @@ app.post('/webhook/twilio/estado', async (req, res) => {
       },
     });
     const personId = evento.data.id;
-    console.log(`Lead creado/encontrado en FUB: ID ${personId}`);
+    console.log(`Lead en FUB: ID ${personId}`);
     const mins = Math.floor((parseInt(CallDuration) || 0) / 60);
     const secs = (parseInt(CallDuration) || 0) % 60;
     const llamada = await fub.post('/calls', {
@@ -61,6 +61,7 @@ app.post('/webhook/twilio/estado', async (req, res) => {
       outcome: CallStatus === 'completed' ? 'Connected' : 'No Answer',
       note: `Llamada ${CallStatus === 'completed' ? 'conectada' : 'sin respuesta'} - ${mins}m ${secs}s`,
       phone: callerPhone,
+      isIncoming: true,
     });
     sesiones.set(CallSid, { ...sesion, fubCallId: llamada.data.id });
     console.log(`Llamada registrada en FUB: ID ${llamada.data.id}`);
@@ -92,3 +93,4 @@ app.post('/webhook/twilio/grabacion', async (req, res) => {
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Servidor en puerto ${PORT}`);
 });
+
