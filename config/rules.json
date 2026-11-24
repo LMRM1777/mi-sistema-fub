@@ -1,0 +1,19 @@
+{
+  "_comment": "Reglas que se revisan ANTES de cada texto. Si alguna falla, el texto no sale.",
+  "timezone": "America/Detroit",
+  "send_window": { "start": "09:00", "end": "20:00" },
+  "skip_weekdays": [7],
+  "stop_tags": ["AI_OPT_OUT", "SMS_OPT_OUT", "DNC", "Do Not Text", "Do Not Contact"],
+  "stop_stages": ["Appointment Set", "Active Client", "Under Contract", "Closed", "Past Client", "Trash", "Agent"],
+  "spanish_tags": ["espanol", "español", "idioma:español", "Spanish"],
+  "keywords": {
+    "CASA": { "lang": "es", "campaign_tag": "drip-casa" },
+    "HOME": { "lang": "en", "campaign_tag": "drip-casa" }
+  },
+  "keyword_reply": {
+    "es": "Lake Michigan Realty: Estás suscrito a mensajes sobre bienes raíces. La frecuencia varía. Pueden aplicar tarifas de mensajes y datos. Responde HELP para ayuda o STOP para cancelar.",
+    "en": "Lake Michigan Realty: You're subscribed to real estate updates. Msg frequency varies. Msg & data rates may apply. Reply HELP for help, STOP to cancel."
+  },
+  "opt_out_words": ["STOP", "STOPALL", "UNSUBSCRIBE", "CANCEL", "END", "QUIT", "PARAR", "ALTO"],
+  "opt_in_words": ["START", "UNSTOP", "YES"]
+}

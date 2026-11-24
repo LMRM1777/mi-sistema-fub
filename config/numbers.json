@@ -1,0 +1,7 @@
+{
+  "_comment": "Un renglón por número de rastreo. 'source' es lo que aparece como fuente en FUB. 'forward_to' es a dónde se desvían las llamadas. 'call_tag' se agrega al lead en FUB cuando llama (déjalo vacío para no arrancar drip). NO pongas aquí los números de Alex/Sofía (Vapi).",
+  "default_forward_to": "+16164336011",
+  "numbers": {
+    "+16162025704": { "source": "Prueba - Sistema propio", "forward_to": "+16164336011", "call_tag": "" }
+  }
+}

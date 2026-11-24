@@ -1,0 +1,36 @@
+{
+  "_comment": "Cada campaña se activa cuando en FUB se le pone al lead el tag 'trigger_tag'. Los pasos se mandan en orden. 'day' = días después de entrar (0 = hoy). 'time' = hora local (America/Detroit) o 'now'. Cada paso tiene texto en español (es) e inglés (en); el idioma sale de los tags del lead. Para editar mensajes NO hace falta tocar código: cambia este archivo en GitHub y Railway se actualiza solo. Usa {first_name} y {agent_name} para personalizar.",
+  "campaigns": [
+    {
+      "id": "nuevo-lead-llamada",
+      "name": "Seguimiento después de llamada",
+      "trigger_tag": "drip-llamada",
+      "stop_on_reply": true,
+      "steps": [
+        { "day": 1, "time": "12:00",
+          "es": "Lake Michigan Realty: Hola {first_name}, soy {agent_name}. ¿Pudiste hablar con alguien de mi equipo? Estoy aquí para ayudarte. Responde STOP para cancelar.",
+          "en": "Lake Michigan Realty: Hi {first_name}, it's {agent_name}. Were you able to talk with someone on my team? I'm here to help. Reply STOP to opt out." },
+        { "day": 3, "time": "10:00",
+          "es": "Lake Michigan Realty: Hola {first_name}, ¿tienes alguna pregunta sobre casas en Michigan? Con gusto te ayudo. Responde STOP para cancelar.",
+          "en": "Lake Michigan Realty: Hi {first_name}, any questions about homes in Michigan? Happy to help. Reply STOP to opt out." },
+        { "day": 7, "time": "09:30",
+          "es": "Lake Michigan Realty: Hola {first_name}, quiero asegurarme de que recibas la mejor atención. ¿Cuándo es buen momento para hablar? Responde STOP para cancelar.",
+          "en": "Lake Michigan Realty: Hi {first_name}, I want to make sure you get great service. When is a good time to talk? Reply STOP to opt out." }
+      ]
+    },
+    {
+      "id": "keyword-casa",
+      "name": "Escribió CASA / HOME",
+      "trigger_tag": "drip-casa",
+      "stop_on_reply": true,
+      "steps": [
+        { "day": 0, "time": "now",
+          "es": "Lake Michigan Realty: ¡Gracias por escribir! Soy {agent_name}. ¿Buscas comprar o vender casa? Responde STOP para cancelar o HELP para ayuda.",
+          "en": "Lake Michigan Realty: Thanks for texting! I'm {agent_name}. Are you looking to buy or sell a home? Reply STOP to opt out or HELP for help." },
+        { "day": 1, "time": "11:00",
+          "es": "Lake Michigan Realty: Hola {first_name}, ¿te gustaría saber cuánto puedes calificar para comprar? Te puedo conectar con un prestamista. Responde STOP para cancelar.",
+          "en": "Lake Michigan Realty: Hi {first_name}, would you like to know how much home you can qualify for? I can connect you with a lender. Reply STOP to opt out." }
+      ]
+    }
+  ]
+}
