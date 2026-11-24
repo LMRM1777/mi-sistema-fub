@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto';
 import { DateTime } from 'luxon';
-import { stepTime, isWithinWindow, nextAllowed } from './schedule.js';
+import { stepTime, relativeTime, isWithinWindow, nextAllowed } from './schedule.js';
 import { pickMobile } from './fub.js';
 
 const lower = (a) => (a || []).map((x) => String(x).toLowerCase());
@@ -10,12 +10,38 @@ export function languageFor(person, rules, fallback = 'en') {
   return lower(rules.spanish_tags).some((t) => tags.includes(t)) ? 'es' : fallback;
 }
 
-export function render(text, person, defaultAgent) {
+// Tipos de paso: los que le llegan al lead por texto, y los que son tarea para el agente.
+export const SMS_TYPES = ['texto', 'imagen', 'vcard'];
+export const isSmsStep = (step) => !step.type || SMS_TYPES.includes(step.type);
+
+const DAYS = { es: ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'], en: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] };
+
+// Reemplaza {first_name}/{agent_name} (v2) y las variables de CallAction ({{contact_first_name}}, {{greeting}}…).
+export function render(text, person, defaultAgent, { now = DateTime.now(), lang = 'en', company = 'Lake Michigan Realty', website = 'https://www.homesearchmi.com', tz = 'America/Detroit' } = {}) {
+  const t = now.setZone(tz);
   const first = (person.firstName || '').trim();
-  return text
+  const agentFull = person.assignedTo || defaultAgent;
+  const agent = agentFull.split(' ')[0];
+  const day = (d) => DAYS[lang][d.weekday - 1];
+  const greet = lang === 'es' ? (t.hour < 12 ? 'Buenos días' : t.hour < 18 ? 'Buenas tardes' : 'Buenas noches') : (t.hour < 12 ? 'Good morning' : t.hour < 18 ? 'Good afternoon' : 'Good evening');
+  const firstContact = person.created ? DateTime.fromISO(person.created).setZone(tz) : null;
+  const vars = {
+    contact_first_name: first, contact_last_name: person.lastName || '', contact_full_name: [first, person.lastName].filter(Boolean).join(' '),
+    user_first_name: agent, user_full_name: agentFull, user_company: company, user_website: website, user_email: person.assignedUserEmail || '',
+    lead_email_address: person.emails?.[0]?.value || '', greeting: greet, today_day: day(t), time_now: t.toFormat('h:mm a'),
+    lead_first_contact_month: firstContact ? firstContact.setLocale(lang).toFormat('LLLL') : '',
+    lead_first_contact_date: firstContact ? firstContact.toFormat('LL/dd') : '',
+    last_msg_time: t.minus({ hours: 1 }).toFormat('h:mm a'),
+  };
+  let out = text
+    .replace(/\{\{\s*from_(\d+)_days?_ago\s*\}\}/g, (_, n) => day(t.minus({ days: +n })))
+    .replace(/\{\{\s*in_(\d+)_days?\s*\}\}/g, (_, n) => day(t.plus({ days: +n })))
+    .replace(/\{\{\s*contact_in_(\d+)min\s*\}\}/g, (_, n) => t.plus({ minutes: +n }).toFormat('h:mm a'))
+    .replace(/\{\{\s*(\w+)\s*\}\}\}?/g, (m, k) => (k in vars ? vars[k] : ''));
+  out = out
     .replace(/\s*\{first_name\}/g, first ? ` ${first}` : '')
-    .replace(/\{agent_name\}/g, person.assignedTo?.split(' ')[0] || defaultAgent)
-    .replace(/\s+([,.!?])/g, '$1');
+    .replace(/\{agent_name\}/g, agent);
+  return out.replace(/[ \t]{2,}/g, ' ').replace(/\s+([,.!?])/g, '$1').trim();
 }
 
 // Revisa todo antes de mandar. Devuelve { ok } o { ok:false, reason } o { ok:false, retryAt }.
@@ -52,7 +78,9 @@ export function makeDrip({ repo, fub, sms, scheduler, config, env, notify = asyn
       await repo.saveEnrollment(enrollment);
       return null;
     }
-    const runAt = stepTime(step, enrollment.enrolledAt, config.rules, now);
+    const runAt = step.after
+      ? relativeTime(step, enrollment.lastStepAt || enrollment.enrolledAt, config.rules, now)
+      : stepTime(step, enrollment.enrolledAt, config.rules, now);
     enrollment.nextStep = stepIndex;
     enrollment.nextAt = runAt.toISO();
     await repo.saveEnrollment(enrollment);
@@ -105,10 +133,23 @@ export function makeDrip({ repo, fub, sms, scheduler, config, env, notify = asyn
     }
 
     const step = campaign.steps[stepIndex];
-    const lang = languageFor(person, config.rules);
-    const body = render(step[lang], person, env.agentName);
+    const lang = campaign.lang || languageFor(person, config.rules);
+    const raw = step.text || step[lang] || step.es || step.en;
+    const body = render(raw, person, env.agentName, { now, lang, tz: config.rules.timezone });
+    enrollment.lastStepAt = now.toUTC().toISO();
+
+    if (!isSmsStep(step)) {
+      // Recordatorio / voz / video / audio → tarea para el agente en FUB, no texto al lead.
+      try { await fub.createTask({ personId: enrollment.personId, name: `[${campaign.name}] ${body}`.slice(0, 250), dueDate: now.toISODate() }); }
+      catch (e) { log.error?.('[drip] no se creó la tarea en FUB', e.message); }
+      enrollment.sent.push({ step: stepIndex, at: enrollment.lastStepAt, task: true });
+      await repo.saveEnrollment(enrollment);
+      await scheduleStep(enrollment, stepIndex + 1, now);
+      return { sent: false, task: true, body };
+    }
+
     const result = await sms.send({ to: g.phone, body });
-    enrollment.sent.push({ step: stepIndex, at: now.toUTC().toISO(), sid: result.sid, dryRun: result.dryRun });
+    enrollment.sent.push({ step: stepIndex, at: enrollment.lastStepAt, sid: result.sid, dryRun: result.dryRun });
     await repo.saveEnrollment(enrollment);
     try {
       await fub.logText({ personId: enrollment.personId, message: body, toNumber: g.phone, fromNumber: result.from, isIncoming: false });
@@ -118,5 +159,5 @@ export function makeDrip({ repo, fub, sms, scheduler, config, env, notify = asyn
   }
 
   return { enroll, runStep, findCampaign, campaignForTag: (tag) =>
-    config.campaigns.find((c) => c.trigger_tag.toLowerCase() === String(tag).toLowerCase()) };
+    config.campaigns.find((c) => c.active !== false && c.trigger_tag.toLowerCase() === String(tag).toLowerCase()) };
 }

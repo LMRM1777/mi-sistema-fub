@@ -22,13 +22,22 @@ export function validateCampaigns(campaigns) {
     if (ids.has(c.id)) throw new Error(`Campaña repetida: ${c.id}`);
     ids.add(c.id);
     c.steps.forEach((s, i) => {
-      if (typeof s.day !== 'number' || !(s.time === 'now' || /^\d{2}:\d{2}$/.test(s.time))) {
-        throw new Error(`Paso ${i + 1} de ${c.id}: 'day' debe ser número y 'time' HH:MM o 'now'`);
+      const where = `Paso ${i + 1} de ${c.id}`;
+      if (s.after) {
+        if (typeof s.after.n !== 'number' || !s.after.unit) throw new Error(`${where}: 'after' necesita n y unit`);
+        if (s.at && !/^\d{1,2}:\d{2}$/.test(s.at)) throw new Error(`${where}: 'at' debe ser HH:MM`);
+      } else if (typeof s.day !== 'number' || !(s.time === 'now' || /^\d{2}:\d{2}$/.test(s.time))) {
+        throw new Error(`${where}: usa 'after' {n, unit} o 'day' + 'time' (HH:MM o 'now')`);
       }
-      if (!s.es || !s.en) throw new Error(`Paso ${i + 1} de ${c.id}: falta texto es/en`);
-      for (const lang of ['es', 'en']) {
-        if (!/STOP/i.test(s[lang])) throw new Error(`Paso ${i + 1} de ${c.id} (${lang}): debe decir STOP`);
-        if (!/Lake Michigan Realty/.test(s[lang])) throw new Error(`Paso ${i + 1} de ${c.id} (${lang}): debe nombrar la marca`);
+      const texts = s.text ? [['text', s.text]] : [['es', s.es], ['en', s.en]];
+      if (texts.some(([, t]) => !t)) throw new Error(`${where}: falta texto (text, o es y en)`);
+      const sms = !s.type || ['texto', 'imagen', 'vcard'].includes(s.type);
+      // Solo las campañas activas tienen que cumplir las reglas del carrier.
+      if (sms && c.active !== false) {
+        for (const [lang, t] of texts) {
+          if (!/STOP/i.test(t)) throw new Error(`${where} (${lang}): debe decir STOP`);
+          if (!/Lake Michigan Realty/.test(t)) throw new Error(`${where} (${lang}): debe nombrar la marca`);
+        }
       }
     });
   }

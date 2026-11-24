@@ -30,3 +30,20 @@ export function stepTime(step, enrolledAtIso, rules, now = DateTime.now()) {
 }
 
 export const isWithinWindow = (now, rules) => +nextAllowed(now, rules) === +now.setZone(rules.timezone);
+
+// Pasos estilo CallAction: el tiempo se cuenta DESDE EL PASO ANTERIOR.
+// step.after = { n, unit } y opcional step.at = "HH:MM" (hora del día después de sumar).
+const UNIT = { segundos: 'seconds', minutos: 'minutes', horas: 'hours', 'días': 'days', semanas: 'weeks', meses: 'months' };
+const WEEKDAY = { 'próximo lunes': 1, 'próximo martes': 2, 'próximo miércoles': 3, 'próximo jueves': 4, 'próximo viernes': 5, 'próximo sábado': 6, 'próximo domingo': 7 };
+
+export function relativeTime(step, prevIso, rules, now = DateTime.now()) {
+  const tz = rules.timezone;
+  let t = DateTime.fromISO(prevIso).setZone(tz);
+  const { n, unit } = step.after;
+  if (UNIT[unit]) t = t.plus({ [UNIT[unit]]: n });
+  else if (WEEKDAY[unit]) { t = t.plus({ days: 1 }); while (t.weekday !== WEEKDAY[unit]) t = t.plus({ days: 1 }); }
+  else throw new Error(`Unidad desconocida: ${unit}`);
+  if (step.at) t = t.set(hm(step.at));
+  if (t < now) t = now.setZone(tz);
+  return nextAllowed(t, rules);
+}

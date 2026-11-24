@@ -17,6 +17,13 @@ Sistema propio de Lake Michigan Realty: números de rastreo por fuente, drips de
 - `numbers.json` — cada número de rastreo: fuente en FUB, a dónde desviar llamadas, tag opcional.
 - `rules.json` — horario, tags y stages que bloquean, palabras clave.
 
+## Campañas copiadas de CallAction
+- `config/callaction-import.json` — las 41 campañas tal cual (referencia).
+- `node scripts/convert-callaction.mjs 18 19` — convierte las que elijas a `campaigns.json`: agrega "Lake Michigan Realty" y STOP, y las deja **inactivas** (`"active": false`).
+- Formato estilo CallAction: cada paso usa `after: {n, unit}` (tiempo **desde el paso anterior**) y `at` opcional (hora). Tipos: `texto`, `imagen`, `vcard` salen al lead; `recordatorio`, `voz`, `video`, `audio` crean una **tarea en FUB** para el agente.
+- Variables soportadas: {{contact_first_name}}, {{user_first_name}}, {{user_full_name}}, {{greeting}}, {{today_day}}, {{from_N_days_ago}}, {{in_N_days}}, {{contact_in_Nmin}}, {{lead_email_address}}, {{user_company}}, {{user_website}}, {{lead_first_contact_month}}…
+- Para prender una: cambia `"active": false` a `true` (el servidor revisa STOP y marca) y **apaga la misma campaña en CallAction** para no mandar doble.
+
 ## Seguridad
 - `SMS_SENDING_ENABLED=false` → modo prueba: nada sale, todo se escribe en el log.
 - Los números de Alex/Sofía (Vapi) NO van en este sistema.
@@ -26,6 +33,6 @@ Sistema propio de Lake Michigan Realty: números de rastreo por fuente, drips de
 - FUB: webhook del evento `peopleTagsCreated` → `{BASE_URL}/webhook/fub`
 
 ## Pruebas
-`npm test` — 12 pruebas con FUB y Twilio simulados (no manda nada).
+`npm test` — 17 pruebas con FUB y Twilio simulados (no manda nada).
 
 `legacy/` = código de mayo 2026, como referencia.

@@ -7,15 +7,24 @@
       "trigger_tag": "drip-llamada",
       "stop_on_reply": true,
       "steps": [
-        { "day": 1, "time": "12:00",
+        {
+          "day": 1,
+          "time": "12:00",
           "es": "Lake Michigan Realty: Hola {first_name}, soy {agent_name}. ¿Pudiste hablar con alguien de mi equipo? Estoy aquí para ayudarte. Responde STOP para cancelar.",
-          "en": "Lake Michigan Realty: Hi {first_name}, it's {agent_name}. Were you able to talk with someone on my team? I'm here to help. Reply STOP to opt out." },
-        { "day": 3, "time": "10:00",
+          "en": "Lake Michigan Realty: Hi {first_name}, it's {agent_name}. Were you able to talk with someone on my team? I'm here to help. Reply STOP to opt out."
+        },
+        {
+          "day": 3,
+          "time": "10:00",
           "es": "Lake Michigan Realty: Hola {first_name}, ¿tienes alguna pregunta sobre casas en Michigan? Con gusto te ayudo. Responde STOP para cancelar.",
-          "en": "Lake Michigan Realty: Hi {first_name}, any questions about homes in Michigan? Happy to help. Reply STOP to opt out." },
-        { "day": 7, "time": "09:30",
+          "en": "Lake Michigan Realty: Hi {first_name}, any questions about homes in Michigan? Happy to help. Reply STOP to opt out."
+        },
+        {
+          "day": 7,
+          "time": "09:30",
           "es": "Lake Michigan Realty: Hola {first_name}, quiero asegurarme de que recibas la mejor atención. ¿Cuándo es buen momento para hablar? Responde STOP para cancelar.",
-          "en": "Lake Michigan Realty: Hi {first_name}, I want to make sure you get great service. When is a good time to talk? Reply STOP to opt out." }
+          "en": "Lake Michigan Realty: Hi {first_name}, I want to make sure you get great service. When is a good time to talk? Reply STOP to opt out."
+        }
       ]
     },
     {
@@ -24,12 +33,1677 @@
       "trigger_tag": "drip-casa",
       "stop_on_reply": true,
       "steps": [
-        { "day": 0, "time": "now",
+        {
+          "day": 0,
+          "time": "now",
           "es": "Lake Michigan Realty: ¡Gracias por escribir! Soy {agent_name}. ¿Buscas comprar o vender casa? Responde STOP para cancelar o HELP para ayuda.",
-          "en": "Lake Michigan Realty: Thanks for texting! I'm {agent_name}. Are you looking to buy or sell a home? Reply STOP to opt out or HELP for help." },
-        { "day": 1, "time": "11:00",
+          "en": "Lake Michigan Realty: Thanks for texting! I'm {agent_name}. Are you looking to buy or sell a home? Reply STOP to opt out or HELP for help."
+        },
+        {
+          "day": 1,
+          "time": "11:00",
           "es": "Lake Michigan Realty: Hola {first_name}, ¿te gustaría saber cuánto puedes calificar para comprar? Te puedo conectar con un prestamista. Responde STOP para cancelar.",
-          "en": "Lake Michigan Realty: Hi {first_name}, would you like to know how much home you can qualify for? I can connect you with a lender. Reply STOP to opt out." }
+          "en": "Lake Michigan Realty: Hi {first_name}, would you like to know how much home you can qualify for? I can connect you with a lender. Reply STOP to opt out."
+        }
+      ]
+    },
+    {
+      "id": "ca-18-leads-facebook",
+      "name": "Leads: Facebook- (de CallAction)",
+      "active": false,
+      "lang": "en",
+      "trigger_tag": "drip-leads-facebook",
+      "stop_on_reply": true,
+      "source": "CallAction C18",
+      "steps": [
+        {
+          "type": "texto",
+          "after": {
+            "n": 4,
+            "unit": "minutos"
+          },
+          "text": "Lake Michigan Realty: 🙂 {{greeting}}  {{contact_first_name}}, I just received your a notification  about 5 min ago that you were looking for info for a house i have listed for sale in Facebook. Are you free for a quick call around {{contact_in_15min}} ? Reply STOP to opt out."
+        },
+        {
+          "type": "vcard",
+          "after": {
+            "n": 17,
+            "unit": "segundos"
+          },
+          "text": "Lake Michigan Realty: Btw, I’m {{user_first_name}} of {{user_company}}, your local listing agent whose site you visited 😀 Is it okay to text you? I try to be responsive and give clients 5 ⭐️service! What attracted you to this home? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 2,
+            "unit": "horas"
+          },
+          "text": "Lake Michigan Realty: Hello, would you like for me to send you real-time email alerts from the MLS to notify you of new listings in the same area? What is the best email address? Reply STOP to opt out."
+        },
+        {
+          "type": "recordatorio",
+          "after": {
+            "n": 1,
+            "unit": "horas"
+          },
+          "text": "🛑 {{user_first_name}} - Setup this Facebook lead on a MLS email alert ASAP also try to contact him Facebook"
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "horas"
+          },
+          "text": "Lake Michigan Realty: All of the 🏡 listings on our site come directly from the local MLS and are updated in real-time, so if you see something you like, just let me or my assistant know. We are both here to help you! Reply STOP to opt out."
+        },
+        {
+          "type": "imagen",
+          "after": {
+            "n": 1,
+            "unit": "días"
+          },
+          "at": "8:25",
+          "text": "Lake Michigan Realty: {{greeting}}, hope you are having a good {{today_day}}! Since you are looking at homes, you'll need to be prepared w/ a mortgage... I thought you may find this FREE guide useful 👉https://go.Homesearchmi.com/Mortgage_Guide Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 5,
+            "unit": "minutos"
+          },
+          "text": "Lake Michigan Realty: ... let me know if you need a referral to a great mortgage lender or anything else I can help you with 🙂! Reply STOP to opt out."
+        },
+        {
+          "type": "voz",
+          "after": {
+            "n": 1,
+            "unit": "horas"
+          },
+          "text": "Voice Message"
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "días"
+          },
+          "at": "12:30",
+          "text": "Lake Michigan Realty: I apologize in advance if I’m interrupting your lunch 😀 Did you have any questions about the houses you are looking at? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 5,
+            "unit": "minutos"
+          },
+          "text": "Lake Michigan Realty: If you have a few mins, I can call you around 1:15pm to discuss your home search? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "días"
+          },
+          "at": "8:30",
+          "text": "Lake Michigan Realty: {{greeting}}, following up from {{from_3_days_ago}} when you started searching our MLS real estate listing site for homes for sale... did you find anything you are interested in seeing? Was the mortgage guide helpful? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "días"
+          },
+          "at": "8:00",
+          "text": "Lake Michigan Realty: {{greeting}}, 🙂 we have a new \"Coming Soon\" home listing that should be available on {{in_6_days}}. Are you interested in getting details? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 3,
+            "unit": "horas"
+          },
+          "text": "Lake Michigan Realty: btw, are you interested in a free list of upcoming 🏡 \"open houses\"?  Should I send it to 👉 {{lead_email_address}} or is there a better email for you? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 2,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: {{greeting}} 🙂 following up from my text on {{from_2_days_ago}} re: an open house list... do you want me to send that to you? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 5,
+            "unit": "minutos"
+          },
+          "text": "Lake Michigan Realty: Just text me any addresses of homes 🏘 you are interested in & I'll setup showings for you on {{in_2_days}} or {{in_3_days}}... here to help you! Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 4,
+            "unit": "días"
+          },
+          "at": "8:00",
+          "text": "Lake Michigan Realty: Have you found any homes 🔎 you'd like to see in person? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 5,
+            "unit": "minutos"
+          },
+          "text": "Lake Michigan Realty: 🙂 let me know if I can help you, okay? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 2,
+            "unit": "semanas"
+          },
+          "at": "8:00",
+          "text": "Lake Michigan Realty: Hi, it's been a few weeks since I checked in with you... how's your 🏡 home search going? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 4,
+            "unit": "próximo viernes"
+          },
+          "at": "8:00",
+          "text": "Lake Michigan Realty: {{greeting}}, if you are still in looking for homes this weekend, let me know. You can text me prices, areas & details of homes your are looking for. I can set you up on an email notification as matching 🏡's hit the MLS... Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 3,
+            "unit": "horas"
+          },
+          "text": "Lake Michigan Realty: btw, do you want a list of upcoming 🏡 open houses? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 20,
+            "unit": "segundos"
+          },
+          "text": "Lake Michigan Realty: That way you don't miss the best deals 💥 & opportunities... let me know if you would like that, okay? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 2,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: Hi, it's {{user_first_name}} again 🙂, just following-up from {{from_2_days_ago}}, did you want me to set you up on the MLS listing alerts? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 5,
+            "unit": "minutos"
+          },
+          "text": "Lake Michigan Realty: Anything you need, please feel free to 📞 call or text me... here to help you 🙂! Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 3,
+            "unit": "días"
+          },
+          "at": "9:05",
+          "text": "Lake Michigan Realty: 🤔... are you still 🔎 for 🏡's? Reply STOP to opt out."
+        },
+        {
+          "type": "voz",
+          "after": {
+            "n": 30,
+            "unit": "minutos"
+          },
+          "text": "Voice Message"
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 3,
+            "unit": "horas"
+          },
+          "text": "Lake Michigan Realty: We have a 🔥 new 🏡 listing that maybe coming up on {{in_3_days}}... I think you may like it, let me know if you are interested in getting the details? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 5,
+            "unit": "minutos"
+          },
+          "text": "Lake Michigan Realty: let me know... I can get probably get you into it before it hits the market! Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 2,
+            "unit": "semanas"
+          },
+          "at": "8:00",
+          "text": "Lake Michigan Realty: Hope all is well on this {{today_day}}! 🙂 checking in to see if you ended up buying a home? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 5,
+            "unit": "minutos"
+          },
+          "text": "Lake Michigan Realty: 😊 Thanks! Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 2,
+            "unit": "días"
+          },
+          "at": "8:00",
+          "text": "Lake Michigan Realty: {{greeting}}, 🙂 been a few months since you started searching for homes on our site. Just checking in to see if you ever ended up buying Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 18,
+            "unit": "segundos"
+          },
+          "text": "Lake Michigan Realty: or if you are still looking to buy🏠? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 2,
+            "unit": "semanas"
+          },
+          "at": "8:00",
+          "text": "Lake Michigan Realty: Checking in on this {{today_day}}... how's your 🏡 search going? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "at": "8:00",
+          "text": "Lake Michigan Realty: Hope you are having a great {{today_day}}! Been about a month since I last reached out to you. Any luck on buying a home 🏠yet? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 5,
+            "unit": "minutos"
+          },
+          "text": "Lake Michigan Realty: 🙂 let me know if I can be of service to you or any friends and family that may need some help buying or selling real estate? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 5,
+            "unit": "minutos"
+          },
+          "text": "Lake Michigan Realty: Let me know if I can help you... okay? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 3,
+            "unit": "semanas"
+          },
+          "text": "Lake Michigan Realty: {{greeting}}, back in {{lead_first_contact_month}}, you registered on our site to search homes from the MLS www.homesearchmi.com 🔎. Did you end up buying something yet?🏠 Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 6,
+            "unit": "semanas"
+          },
+          "text": "Lake Michigan Realty: Happy {{today_day}}... been a while since we last communicated. How's your 🏡 🔎real estate search going? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 2,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: Hi, I sent you a text on {{from_2_days_ago}} about calling you to see if I can help you find a home 🏡. Is this a good time for me to call you? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: Hi {{contact_first_name}}, I tried reaching out to you a few months ago. Are you still looking for a home to buy? {{user_first_name}} with {{user_company}} Reply STOP to opt out."
+        },
+        {
+          "type": "imagen",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: Hi {{contact_first_name}}, Here is a Real Estate Tip: 5 steps checklist before start your search  https://go.Homesearchmi.com/Buyer_checklist Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: ✅ checking in {{contact_first_name}}... you inquired last {{lead_first_contact_month}} about buying a home... Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 48,
+            "unit": "segundos"
+          },
+          "text": "Lake Michigan Realty: If you still looking, just text me the following details & I'll send you new 🏠 listings... - Area's you are interested in? - Beds\nBaths\nSqft? - Price range? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: Hey {{contact_first_name}}, I feel terrible that we never connected about you’re home search. Are you still searching home? 🏠{{user_first_name}} a local Real Estate agent Reply STOP to opt out."
+        },
+        {
+          "type": "imagen",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: Hi {{contact_first_name}}, Here is a Real Estate Tip, 7 Mistakes when buy your first home \nhttps://go.Homesearchmi.com/7_Misteakes Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: Hi {{contact_first_name}}, I tried reaching out to you a few months ago. Are you still looking for a home to buy?🏠🏡 Reply STOP to opt out."
+        },
+        {
+          "type": "voz",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Voice Message"
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 30,
+            "unit": "minutos"
+          },
+          "text": "Lake Michigan Realty: Hi {{contact_first_name}} I just tried calling you and it went to VM, let me know if you are available today after 6pm tonight Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: Hi {{contact_first_name}}, I noticed you haven’t been back to the site in awhile. www.homesearchmi.com Did I drop the ball? Were you looking for something different? {{user_first_name}} Reply STOP to opt out."
+        },
+        {
+          "type": "imagen",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: Hi {{contact_first_name}}, Here is a Real State tip, 7 Grants and programs to help Home Buyers\nhttps://go.Homesearchmi.com/7_Grants Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: HI {{contact_first_name}}, are you still shopping for a home?🏘 Reply STOP to opt out."
+        },
+        {
+          "type": "imagen",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: Hi {{contact_first_name}}, Here is a Real Estate Tip, 3 easy steps on how to dispute errors on your credit report \nhttps://go.Homesearchmi.com/Credit_Report Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: Hi {{contact_first_name}} I wanted to check in with you and update our Home Buyer List. Did you ever purchase a new home?🏠 Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: I’m previewing homes today and some are not even on the market yet, are you still looking for a home?🏠 Reply STOP to opt out."
+        },
+        {
+          "type": "imagen",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: Hi {{contact_first_name}}, Here is a Real Estate Tip, Applying for a Mortgage Loan? Here are proven Ways to improve your Credit Score\nhttps://go.Homesearchmi.com/Improve_Score Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: Hi {{contact_first_name}},are you still interested in searching online for a home? visit www.mlshomesearchmi.com Reply STOP to opt out."
+        },
+        {
+          "type": "imagen",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: HI{{contact_first_name}}, Tip of the Month, To Rent Or To Buy: Top Things You Should Know, \nhttps://go.Homesearchmi.com/Rent_Or_BUY Reply STOP to opt out."
+        },
+        {
+          "type": "imagen",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: Hi {{contact_first_name}}, Tip of the Month, 5 things could go wrong if you skip hiring  a Realtor https://go.Homesearchmi.com/Buying_with_Realtor Reply STOP to opt out."
+        },
+        {
+          "type": "imagen",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: Hi , Tip of the Month, Ins and Outs of giving or receiving Downpayments https://go.Homesearchmi.com/Ins_outs_Downpayment Reply STOP to opt out."
+        },
+        {
+          "type": "imagen",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: Hi , Tip of the Month, Key Professionals you need when buying a house https://go.Homesearchmi.com/Key_Professionals Reply STOP to opt out."
+        },
+        {
+          "type": "imagen",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: Hi, Tip of the month, Home Owners insurance Cost https://go.Homesearchmi.com/HOI_Cost Reply STOP to opt out."
+        }
+      ]
+    },
+    {
+      "id": "ca-19-leads-google-adds-mlshomesearch",
+      "name": "Leads: Google Adds MLSHomesearch (de CallAction)",
+      "active": false,
+      "lang": "en",
+      "trigger_tag": "drip-leads-google-adds-mlshomesearch",
+      "stop_on_reply": true,
+      "source": "CallAction C19",
+      "steps": [
+        {
+          "type": "texto",
+          "after": {
+            "n": 34,
+            "unit": "segundos"
+          },
+          "text": "Lake Michigan Realty: {{greeting}}, it's {{user_first_name}}. I just received your inquiry from our site MLShomesearchmi.com  see a 🏡home, What's the best time to call you?or texting be better? talk to you soon Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 17,
+            "unit": "segundos"
+          },
+          "text": "Lake Michigan Realty: ... are you free around {{contact_in_45min}}  for a call to setup a 🏡home showing appointment 🙂? Reply STOP to opt out."
+        },
+        {
+          "type": "recordatorio",
+          "after": {
+            "n": 20,
+            "unit": "segundos"
+          },
+          "text": "✅ {{user_first_name}} 🔥🔥- First and Second Call  MLShomeaserchmi ASAP"
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 36,
+            "unit": "minutos"
+          },
+          "text": "Lake Michigan Realty: Hi again...  😊 did you get my last text re: your email inquiry to setup a time see the 🏡 home you are interested in? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "horas"
+          },
+          "text": "Lake Michigan Realty: All of the 🏡 listings on our site come directly from the local MLS and are updated in real-time, so if you see something you like, just let me know! Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 7,
+            "unit": "minutos"
+          },
+          "text": "Lake Michigan Realty: I'm getting avail times for the 🏡 showing, are you avail. {{in_1_day}} & what time do you want to see it? Reply STOP to opt out."
+        },
+        {
+          "type": "vcard",
+          "after": {
+            "n": 4,
+            "unit": "horas"
+          },
+          "text": "Lake Michigan Realty: Btw, to make it easy for us to connect in case you find a home 😍 & wish to see in person... here's my vCard.  Please click to add my contact info 📲 Reply STOP to opt out."
+        },
+        {
+          "type": "imagen",
+          "after": {
+            "n": 1,
+            "unit": "días"
+          },
+          "at": "8:25",
+          "text": "Lake Michigan Realty: {{greeting}}, hope you are having a good {{today_day}}! Since you are looking at homes, you'll need to be prepared w/ a mortgage... I thought you may find this FREE guide useful 👉https://go.Homesearchmi.com/Mortgage_Guide Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 5,
+            "unit": "minutos"
+          },
+          "text": "Lake Michigan Realty: ... let me know if you need a referral to a great mortgage lender or anything else I can help you with 🙂! Reply STOP to opt out."
+        },
+        {
+          "type": "voz",
+          "after": {
+            "n": 1,
+            "unit": "horas"
+          },
+          "text": "Voice Message"
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 8,
+            "unit": "horas"
+          },
+          "text": "Lake Michigan Realty: Hi, it's {{time_now}} on {{today_day}}... I'm following up re: your inquiry from {{from_1_day_ago}} to see a 🏡. Do you still want to see this house? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "días"
+          },
+          "at": "8:30",
+          "text": "Lake Michigan Realty: {{greeting}}, following up from {{from_3_days_ago}} when you started searching our MLS real estate listing site for homes for sale... did you find anything you are interested in seeing? Was the mortgage guide helpful? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "horas"
+          },
+          "text": "Lake Michigan Realty: 🙂 {{greeting}}, do you have time to talk today to discuss seeing the home you were interested in? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 5,
+            "unit": "días"
+          },
+          "at": "8:00",
+          "text": "Lake Michigan Realty: {{greeting}} again 🙂... I've tried calling & texting you since {{from_5_days_ago}}to setup a showing of the home you inquired about... please call me back 🙂 Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 21,
+            "unit": "segundos"
+          },
+          "text": "Lake Michigan Realty: ... we have another 🏡 listing that maybe \"coming soon\" in the same area... would you interested in seeing that home or others? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 5,
+            "unit": "próximo miércoles"
+          },
+          "at": "8:00",
+          "text": "Lake Michigan Realty: btw, are you interested in a free list of upcoming 🏡 \"open houses\"?  Should I send it to 👉{{lead_email_address}}  or is there a better email for you? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 15,
+            "unit": "próximo viernes"
+          },
+          "at": "8:00",
+          "text": "Lake Michigan Realty: {{greeting}}🙂 following up from{{from_2_days_ago}} my text on  re: an open house list... do you want me to send that to you? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 48,
+            "unit": "minutos"
+          },
+          "text": "Lake Michigan Realty: ...  🤔 just want to know if I should keep following up w/ you? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 2,
+            "unit": "días"
+          },
+          "at": "10:00",
+          "text": "Lake Michigan Realty: {{greeting}}, good news, looks like a brand new home listing is coming up that I think you will 😍, let me know if you want 🏡 details? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 60,
+            "unit": "segundos"
+          },
+          "text": "Lake Michigan Realty: or Just text me any addresses of homes you are interested in & I'll setup showings for you on {{in_2_days}} or{{in_3_days}} ... here to help you! Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "días"
+          },
+          "at": "8:00",
+          "text": "Lake Michigan Realty: {{greeting}}, i've been trying to reach you since  {{from_7_days_ago}}to setup the home showing 🏡 you requested. Please let me know if you are still interested... please? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "días"
+          },
+          "at": "8:00",
+          "text": "Lake Michigan Realty: Hi, you can search some of the most recent home listings directly from the MLS here... {{user_website}} Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 22,
+            "unit": "minutos"
+          },
+          "text": "Lake Michigan Realty: ... let me know Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "horas"
+          },
+          "text": "Lake Michigan Realty: Are you interested in a list of 🏡 upcoming open houses? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 20,
+            "unit": "segundos"
+          },
+          "text": "Lake Michigan Realty: That way you don't miss the best deals & opportunities... let me know if you would like that, okay? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 2,
+            "unit": "días"
+          },
+          "at": "8:00",
+          "text": "Lake Michigan Realty: {{greeting}}, hope you are having a great {{today_day}}, just checking in to see if you are free for a call today? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 4,
+            "unit": "horas"
+          },
+          "text": "Lake Michigan Realty: Do you want me to me to send you the newest 🏡 real estate listings? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 3,
+            "unit": "días"
+          },
+          "at": "8:00",
+          "text": "Lake Michigan Realty: 🤔... checking in again from {{from_3_days_ago}}? Haven't heard back... please let me know if you are still looking for homes... Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 18,
+            "unit": "segundos"
+          },
+          "text": "Lake Michigan Realty: Please let know either way... Reply STOP to opt out."
+        },
+        {
+          "type": "imagen",
+          "after": {
+            "n": 9,
+            "unit": "días"
+          },
+          "at": "8:30",
+          "text": "Lake Michigan Realty: Hi {{contact_first_name}}, Here is a Real Estate Tip: 5 steps checklist before start your search  https://go.Homesearchmi.com/Buyer_checklist Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 9,
+            "unit": "días"
+          },
+          "at": "8:00",
+          "text": "Lake Michigan Realty: 🙂 been a month since you started searching for home on our site. http://mlshomesearchmi.com ... let me know if you ready to start looking at 🏡 now? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "horas"
+          },
+          "text": "Lake Michigan Realty: ... there is some new 🏡 listings coming up soon that I think you'll like... Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 17,
+            "unit": "segundos"
+          },
+          "text": "Lake Michigan Realty: ... let me know if you want me to send them to you? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "semanas"
+          },
+          "at": "8:00",
+          "text": "Lake Michigan Realty: Hope all is well on this ! 🙂 checking in to see if you ended up buying a home? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 15,
+            "unit": "segundos"
+          },
+          "text": "Lake Michigan Realty: 😊 Thanks! Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 4,
+            "unit": "días"
+          },
+          "at": "8:00",
+          "text": "Lake Michigan Realty: {{greeting}}, 🙂 been a months since you started searching for homes on our site. Just checking in to see if you ever ended up buying Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "semanas"
+          },
+          "at": "8:00",
+          "text": "Lake Michigan Realty: Checking in on this {{today_day}}... how's your 🏡 search going? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 15,
+            "unit": "segundos"
+          },
+          "text": "Lake Michigan Realty: or if you are still looking to buy🏠? Reply STOP to opt out."
+        },
+        {
+          "type": "imagen",
+          "after": {
+            "n": 1,
+            "unit": "semanas"
+          },
+          "at": "8:00",
+          "text": "Lake Michigan Realty: Hi {{contact_first_name}}, Here is a Real Estate Tip, 7 Mistakes when buy your first home \nhttps://go.Homesearchmi.com/7_Misteakes Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "semanas"
+          },
+          "at": "8:00",
+          "text": "Lake Michigan Realty: ... {{greeting}}, been few months... how things going with your 🏡 search? Can I help? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 2,
+            "unit": "días"
+          },
+          "at": "8:00",
+          "text": "Lake Michigan Realty: {{greeting}}, following up from  {{from_3_days_ago}}, Was the 7 mistakes for buying a home guide helpful? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 15,
+            "unit": "minutos"
+          },
+          "text": "Lake Michigan Realty: 👋 Hello? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "at": "10:00",
+          "text": "Lake Michigan Realty: {{greeting}}, back in {{lead_first_contact_month}}, you registered on our site to search homes from the MLS www.mlshomesearchmi.com 🔎. Did you end up buying something yet?🏠 Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "at": "8:00",
+          "text": "Lake Michigan Realty: Happy{{today_day}} ... been a while since we last communicated. How's your 🏡 🔎real estate search going? tons of listings in the market, check it up! \nhttps://go.Homesearchmi.com/Newest_Listings Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 2,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: Hi, I sent you a text on{{from_2_days_ago}}  Just  following up with your home search 🏡. Is this a good time for me to call you? or text is better? talk to you soon Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: Hi {{contact_first_name}}, I tried reaching out to you a few months ago. Are you still looking for a home to buy?{{user_first_name}}  with {{user_company}} Reply STOP to opt out."
+        },
+        {
+          "type": "imagen",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: Hi {{contact_first_name}}, Here is a Real State tip, 7 Grants and programs to help Home Buyers\nhttps://go.Homesearchmi.com/7_Grants Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 2,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: {{contact_first_name}}, following up from {{from_3_days_ago}} , Was the 7 grants programs guide for buyers helpful? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 3,
+            "unit": "semanas"
+          },
+          "at": "16:15",
+          "text": "Lake Michigan Realty: Hi, it's {{user_first_name}}! Just wanted to see if you are still in the market to buy a home 🏡? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 26,
+            "unit": "segundos"
+          },
+          "text": "Lake Michigan Realty: If you are 😀... I'm happy to send you a list of new listings based on your needs... just let me know what you are looking for Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: Hi {{contact_first_name}}, I tried reaching out to you a few months ago. Are you still looking for a home to buy?🏠🏡 Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: Hey {{contact_first_name}}, I feel terrible that we never connected about you’re home search. Are you still searching home? 🏠 {{user_first_name}}a local Real Estate agent Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 15,
+            "unit": "segundos"
+          },
+          "text": "Lake Michigan Realty: Just in case you still searching  for a new home 🏡 here is the site again 👉 https://go.Homesearchmi.com/Newest_Listings Reply STOP to opt out."
+        },
+        {
+          "type": "voz",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Voice Message"
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 30,
+            "unit": "minutos"
+          },
+          "text": "Lake Michigan Realty: Hi {{contact_first_name}} I just tried calling you and it went to VM, let me know if you are available today after 6pm tonight Reply STOP to opt out."
+        },
+        {
+          "type": "imagen",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: Hi {{contact_first_name}}, Here is a Real Estate Tip, 3 easy steps on how to dispute errors on your credit report 👉\nhttps://go.Homesearchmi.com/Credit_Report Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: Hi {{contact_first_name}} I wanted to check in with you and update our Home Buyer List. Did you ever purchase a new home?🏠 Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: I’m previewing homes today and some are not even on the market yet, are you still looking for a home?🏠 Reply STOP to opt out."
+        },
+        {
+          "type": "imagen",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: HI, {{contact_first_name}}Tip of the Month, To Rent Or To Buy: Top Things You Should Know,👇\nhttps://go.Homesearchmi.com/Rent_Or_BUY Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: ✅ checking in {{contact_first_name}}... you inquired last {{lead_first_contact_month}} about buying a home... Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 48,
+            "unit": "segundos"
+          },
+          "text": "Lake Michigan Realty: If you still looking, just text me the following details & I'll send you new 🏠 listings... - Area's you are interested in? - Beds\nBaths\nSqft? - Price range? Reply STOP to opt out."
+        },
+        {
+          "type": "imagen",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: Hi {{contact_first_name}}, Tip of the Month, 5 things could go wrong if you skip hiring  a Realtor https://go.Homesearchmi.com/Buying_with_Realtor Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 2,
+            "unit": "semanas"
+          },
+          "at": "17:20",
+          "text": "Lake Michigan Realty: 🙂 {{greeting}}, hope you are having a good {{today_day}}! We last chatted in {{lead_first_contact_month}} about your interest in buying a house 🏠. Are you still in the market? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 3,
+            "unit": "días"
+          },
+          "at": "9:50",
+          "text": "Lake Michigan Realty: Following up regarding my text on {{from_3_days_ago}}... Reply STOP to opt out."
+        },
+        {
+          "type": "imagen",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: Hi {{contact_first_name}}, Tip of the Month, Ins and Outs of giving or receiving Downpayments https://go.Homesearchmi.com/Ins_outs_Downpayment Reply STOP to opt out."
+        },
+        {
+          "type": "imagen",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: Hi {{contact_first_name}}, Tip of the Month, Key Professionals you need when buying a house https://go.Homesearchmi.com/Key_Professionals Reply STOP to opt out."
+        },
+        {
+          "type": "imagen",
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "text": "Lake Michigan Realty: Hi{{contact_first_name}}, Tip of the month, Home Owners insurance Cost https://go.Homesearchmi.com/HOI_Cost Reply STOP to opt out."
+        },
+        {
+          "type": "recordatorio",
+          "after": {
+            "n": 5,
+            "unit": "minutos"
+          },
+          "text": "🛑 {{user_first_name}} - End of drip campaigns. Please Call again & update status in CRM. Assign new follow-up campaign"
+        }
+      ]
+    },
+    {
+      "id": "ca-13-ylopo-returned",
+      "name": "Ylopo - Returned (de CallAction)",
+      "active": false,
+      "lang": "en",
+      "trigger_tag": "RETURNED",
+      "stop_on_reply": true,
+      "source": "CallAction C13",
+      "steps": [
+        {
+          "type": "recordatorio",
+          "after": {
+            "n": 8,
+            "unit": "minutos"
+          },
+          "text": "⚠️ {{user_first_name}} - Record Ylopo VM Scripts & replace this message with VM Drop #1"
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 22,
+            "unit": "minutos"
+          },
+          "text": "Lake Michigan Realty: Hi, hope you are having a great {{today_day}}. It’s {{user_first_name}}. I called earlier because you visited our site via Facebook awhile back. How’s your home search going? What areas are you looking in? Reply STOP to opt out."
+        },
+        {
+          "type": "vcard",
+          "after": {
+            "n": 19,
+            "unit": "segundos"
+          },
+          "text": "Lake Michigan Realty: Oh btw,, here’s my contact info to make it easier for us to connect if you want 5 ⭐️ service when you find a home that interests you :) Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 2,
+            "unit": "días"
+          },
+          "at": "9:15",
+          "text": "Lake Michigan Realty: Good morning! I called you on {{from_2_days_ago}} & my assistant may have checked in w/ you also. Are you free for a quick call this afternoon around 4pm? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 6,
+            "unit": "horas"
+          },
+          "text": "Lake Michigan Realty: 😀 Hi, checking in again, are you available for a quick call in about 45 mins? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 15,
+            "unit": "próximo jueves"
+          },
+          "at": "16:30",
+          "text": "Lake Michigan Realty: Hi! The week is almost over 😀 Did you have plans to drive through some neighborhoods on Sat or Sun to look at some houses? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 27,
+            "unit": "segundos"
+          },
+          "text": "Lake Michigan Realty: Homes are selling quickly, so better to get a current list directly from the MLS. I’d be happy to send you a list of available 🏡 homes if you like? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 4,
+            "unit": "días"
+          },
+          "at": "12:45",
+          "text": "Lake Michigan Realty: Hope all is well this {{today_day}}& I didn’t catch you eating lunch 😊 Did you find any homes that interested you last weekend? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 9,
+            "unit": "días"
+          },
+          "at": "16:15",
+          "text": "Lake Michigan Realty: Good afternoon! Our office has a few new real estate listings that are “coming soon”… are you still looking? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 18,
+            "unit": "segundos"
+          },
+          "text": "Lake Michigan Realty: Would you be free for a quick call around {{contact_in_45min}} to catch up? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 2,
+            "unit": "semanas"
+          },
+          "text": "Lake Michigan Realty: {{greeting}}! It’s {{user_first_name}}. Are you getting our email alerts? {{lead_email_address}}? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 22,
+            "unit": "segundos"
+          },
+          "text": "Lake Michigan Realty: 🙂Here to help. Let me know if we should adjust the 🏡 price range or areas? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 9,
+            "unit": "días"
+          },
+          "at": "10:15",
+          "text": "Lake Michigan Realty: Sorry… we haven’t been able to connect over the last month or so. 🤔Should I continue to reach out to you? Reply STOP to opt out."
+        },
+        {
+          "type": "vcard",
+          "after": {
+            "n": 28,
+            "unit": "segundos"
+          },
+          "text": "Lake Michigan Realty: I’m just trying to give you 5 ⭐️service 🙂… here’s my contact info if you should need help. Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 34,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: 🙂 Been a while… how are things going w/ your home search? Are you getting our emails? Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 3,
+            "unit": "días"
+          },
+          "at": "16:45",
+          "text": "Lake Michigan Realty: Hope you are having a good {{today_day}}. Did you get my message on {{from_3_days_ago}} Reply STOP to opt out."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 19,
+            "unit": "segundos"
+          },
+          "text": "Lake Michigan Realty: Can I call you at this number around {{contact_in_45min}}? Let me know... Reply STOP to opt out."
+        }
+      ]
+    },
+    {
+      "id": "ca-7-compradores-buyer-leads-isa-spanish",
+      "name": "Compradores Buyer Leads ISA-(SPANISH) (de CallAction)",
+      "active": false,
+      "lang": "es",
+      "trigger_tag": "SpanishBuyerISA",
+      "stop_on_reply": true,
+      "source": "CallAction C7",
+      "steps": [
+        {
+          "type": "texto",
+          "after": {
+            "n": 5,
+            "unit": "días"
+          },
+          "at": "9:30",
+          "text": "Hola Buenos dias 🙂 {{contact_first_name}}, soy {{user_first_name}} de Lake Michigan Realty. ¿Cómo estás hoy? Recibimos su consulta sobre sus objetivos de bienes raíces no hace mucho tiempo, y estoy aquí para preguntarme si hay algo en lo que pueda ayudarlo Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: ¿Desea hablar  📞con uno de nuestros agentes para comprender mejor el proceso y prepararse para el próximo paso? ¡Estamos a solo una llamada, incluso a un mensaje de texto!📱 Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: Envió información sobre sus objetivos de propiedad de vivienda 🏡 en uno de nuestros sitios web, https://go.Homesearchmi.com/buscomicasa y quería programar un horario para reunirnos para una consulta de comprador GRATUITA... ¿está disponible para una llamada rápida?📞 Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: Si buscas 🔎 comprar, tenemos opciones para ti en materia de educación financiera. Pero me gustaría comprender un poco mejor sus objetivos para enviarlo al socio adecuado que lo ayude a comenzar.  ✅. ¿Le funciona mejor la mañana o la tarde para una llamada rápida? Responde STOP para cancelar."
+        },
+        {
+          "type": "vcard",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: Por cierto, para facilitarnos la conexión en caso de que encuentres una casa 😍 y desees verla en persona... aquí está mi Informacion. Haz clic para agregar mi información de contacto 📲 Responde STOP para cancelar."
+        },
+        {
+          "type": "voz",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Voice Message"
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: Todos los listados de 🏡 en nuestro sitio provienen directamente del MLS local y se actualizan en tiempo real, por lo que si ve algo que le gusta, háganoslo saber a mí o a mi asistente. ¡Ambos estamos aquí para ayudarte!  👉 http://www.compracasasmi.com Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Hola, {{contact_first_name}},🙂 ¿alguna novedad con tu búsqueda inicial? 👀Quería registrarme ya que no he tenido noticias tuyas, ¿han cambiado tus planes? {{user_full_name}} - ✅. Lake Michigan Realty Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: Tener una carta de aprobación previa es útil. Cuando encuentre su hogar, 🏡es posible que desee enviar una oferta lo antes posible para aumentar sus posibilidades. Organice una reunión con uno de los prestamistas preferidos para comenzar a analizar sus opciones. ¿Te funciona mejor hoy o mañana por la tarde? Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "at": "9:00",
+          "text": "Lake Michigan Realty: Saludos, {{contact_first_name}}🙂 tendremos una nueva lista de casas \"Próximamente\" que debería estar disponible esta tarde . ¿Estás interesado en obtener mas detalles? Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: ¡Buenos días! {{contact_first_name}} 🙂aquí de nuevo. Solo quiero asegurarme de que no estamos dejando caer la pelota. Incluso si tiene un plan a largo plazo, podemos ayudarlo con el proceso Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: Saludos {{contact_first_name}}, 🙂si todavía estás buscando casas este fin de semana, házmelo saber. Puede enviarle un mensaje de texto con precios, áreas y detalles de las casas que estás buscando. Puedo programarte una notificación por correo electrónico cuando coincidan las  🏡  que salen ala venta Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "at": "9:15",
+          "text": "Lake Michigan Realty: Buenos dias {{contact_first_name}},¡Espero que la estés pasando bien! Ya que está buscando casas, a continuacion en el siguiente texto le enviare las preguntas que se hacen los compradores al compra una Casa.👇 Responde STOP para cancelar."
+        },
+        {
+          "type": "imagen",
+          "after": {
+            "n": 45,
+            "unit": "segundos"
+          },
+          "text": "Lake Michigan Realty: Guia gratis de preguntas que se hacen los compradores al comprar una casa 👉👉https://www.homesearchmi.com/preguntas-que-hacer-al-comprar-una-casa Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: Hola {{contact_first_name}} , 🙂Le quiero dar seguimiento desde  cuando comenzó a buscar casas en venta en nuestro sitio   👉https://go.Homesearchmi.com/buscomicasa ¿encontró algo que le interese ver? ¿Fue útil la guía de preguntas para compradores que le envie? Responde STOP para cancelar."
+        },
+        {
+          "type": "recordatorio",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Task: 1st Llamada de la Q1 para Spanish lead"
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Hola, {{contact_first_name}},🙂 ¿cómo va todo? ¿Cómo se ven los planes en bienes raíces para ti? Te llamé hace unos días para platicar. {{user_first_name}} - Lake Michigan Realty🏡 Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: Uno de nuestros clientes más recientes compró su casa 🏠 a uno de nuestros propios agentes inmobiliarios incluso antes de que saliera al mercado, aprovechando su acuerdo EXCLUSIVO con el equipo. Todo lo que necesita hacer es comenzar el proceso, ¿esto es algo que despierta su interés? Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Hola, {{contact_first_name}}, 🙂soy yo nuevamente, {{user_first_name}} de  Lake Michigan Realty, con oficinas en Wyoming, MI y cobertura para el área del Condado de Kent y sus alrededores. ¿Le gustaría reunirse con un agente de bienes raíces y discutir los planes en curso? Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: Saludos {{contact_first_name}}, 🙂Si Usted es un Comprador de casa por primera vez esta guia puede ser util para usted, Una guia de assistencia para el pago inicial (enganche)💰 Responde STOP para cancelar."
+        },
+        {
+          "type": "imagen",
+          "after": {
+            "n": 5,
+            "unit": "minutos"
+          },
+          "text": "Lake Michigan Realty: Una Guia completamente gratis de Assistencia para el pago inicial (Enganche)  👉https://www.homesearchmi.com/assistenciapagoinicial Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 5,
+            "unit": "minutos"
+          },
+          "text": "Lake Michigan Realty: Si necesita hacer una cita con uno de nuestros profesionales de bienes y raices no dude en contactarnos, aqui un 📅 de citas donde usted puede ajendar su cita en cualquier momento Responde STOP para cancelar."
+        },
+        {
+          "type": "recordatorio",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Task: 2nd Quarterly Follow Up Call"
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: Le ayudaremos con algo más que comprar su casa. 🏡Tenemos un equipo completo listo para su proceso, incluso tenemos nuestra propia División de Atención al Cliente que estará trabajando entre bastidores para sacarle el máximo provecho a su experiencia. Acércate para aprender un poco más. {{user_first_name}} Responde STOP para cancelar."
+        },
+        {
+          "type": "imagen",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "¿Has visitado nuestro sitio web? 💪 https://go.Homesearchmi.com/buscomicasa , también consulte nuestras reseñas en Facebook, Google y Zillow👉.https://go.Homesearchmi.com/check-Google-Reviews .{{user_first_name}} Lake Michigan Realty Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: Podemos ayudarlo con el proceso de compra, o ayudarlo a generar riqueza 💰a través de bienes raíces🏡, podemos ayudarlo a seguir adelante con cualquier proyecto que pueda tener en bienes raíces. Comenzando desde cero 👌o cualquier proyecto en curso que pueda tener. Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "¿Has estado recibiendo mis mensajes de texto? 📱Solo estoy comprobando porque ha pasado un tiempo desde la última vez que nos pusimos en contacto. {{user_first_name}}- Lake Michigan Realty Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Hola, {{contact_first_name}}, 🙂habla {{user_first_name}} con Lake Michigan Realty nuevamente. Solo registrándome. ¿Estás listo para comenzar a mover las piezas hacia tus objetivos inmobiliarios?🎯 Responde STOP para cancelar."
+        },
+        {
+          "type": "recordatorio",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "3nd Quarterly Follow Up Call"
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "¿Está buscando vender, 🏡comprar o tiene algún interés en aumentar su riqueza  a través de bienes raíces en un futuro cercano? Tenemos un maravilloso equipo listo para ayudarte cuando lo decidas. Simplemente comuníquese con nosotros y lo guiaremos a través del proceso.{{user_first_name}} - at Lake Michigan Realty Responde STOP para cancelar."
+        },
+        {
+          "type": "imagen",
+          "after": {
+            "n": 15,
+            "unit": "próximo viernes"
+          },
+          "at": "9:00",
+          "text": "Lake Michigan Realty: Buenos dias{{contact_first_name}} ,🙂 Aqui le envio un link donde puede encontrar los Open Houses  👉https://go.Homesearchmi.com/OpenHouse de este fin de semana, o si desea una cita para ver la casa en privado no dude en contactarnos Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: Hola, {{contact_first_name}}, 🙂el mercado está de moda en este momento, tenemos un increíble equipo de profesionales inmobiliarios listos y dispuestos a guiarte a través del proceso que estás investigando. ¿Quieres hablar rápido por teléfono?📞 Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: Hola, {{contact_first_name}}, espero que estés bien. Pasa por aquí para ver cómo va todo con tu plan 🎯de bienes raíces Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: Hola, {{contact_first_name}} Soy {{user_first_name}} Espero que hayas estado bien, queriendo ver si hay nuevas actualizaciones en la búsqueda 🔍de tu nuevo hogar Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "at": "17:30",
+          "text": "Lake Michigan Realty: Hola buenas tardes {{contact_first_name}}, 🙂recuerda que puedes comunicarte conmigo si tienes alguna pregunta o inquietud sobre bienes raíces. Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "at": "9:00",
+          "text": "Hola, buenos dias{{contact_first_name}}.☕️  nuevamente de Lake Michigan Realty. ¿Ha visto anuncios recientes en torno a las áreas que le interesan? Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: Hola, {{contact_first_name}}, ¿cómo va tu proceso? 👍Programemos una reunión. Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: 🤔... ¿sigues 🔎 por 🏡? Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: {{contact_first_name}}🙂 han pasado algunos meses desde que comenzó a buscar casas en nuestro sitio. Solo un texto de cortesia para ver si alguna vez terminaste comprando Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: Hola {{contact_first_name}}, Solo por curiosidad 🤔me preguntaba si conoces a alguien que esté interesado en comprar una propiedad. Responde STOP para cancelar."
+        },
+        {
+          "type": "recordatorio",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "4rd Quarterly Follow Up Call"
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: Hola, te llamé 📞la semana pasada para ver cómo estabas nuevamente y me preguntaba si tenías alguna pregunta en este momento Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: Solo me preguntaba si tiene otros planes con respecto a bienes raíces Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: ¿Cómo te va? ¿Has podido recibir mis mensajes de texto?📱 Solo asegurándonos de no perder el control para poder ofrecerle la mejor experiencia Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: ¡Hola! Ha pasado un poco desde la última vez que tuvimos una actualización. ¿Qué te pasa, qué está pasando con tu búsqueda de casa🏡? Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: Buenos días, {{contact_first_name}}☕️, espero que estés bien. Podemos enviarle las alertas de listado a su correo electrónico. Avísame si necesitas ayuda con algo Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: ¿Cómo te va? {{contact_first_name}} te recordamos nuestra consulta GRATUITA para compradores. Llámeme para que podamos programar una reunión 👨‍👩‍👦o algo con nuestros profesionales de bienes raíces. Podría ser tomando un café ☕️o en zoom si lo desea. Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: Hola, solo estoy siguiendo su plan 🎯de bienes raíces 🏡solo para ver si tiene alguna pregunta o comentario. Estaré más que feliz de ayudarlo. Responde STOP para cancelar."
+        },
+        {
+          "type": "texto",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Lake Michigan Realty: Para cualquiera de sus necesidades inmobiliarias, no dude en comunicarse. 📞Visite nuestra página de Facebook o búsquenos en Google, Lake MIchigan Realty Mangement, y comience su propia aventura inmobiliaria Responde STOP para cancelar."
+        },
+        {
+          "type": "recordatorio",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "5th Quarterly Follow Up Call"
+        },
+        {
+          "type": "recordatorio",
+          "after": {
+            "n": 10,
+            "unit": "días"
+          },
+          "text": "Assign New Follow Up Plan or Send to Bank"
+        }
       ]
     }
   ]

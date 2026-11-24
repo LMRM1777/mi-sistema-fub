@@ -49,6 +49,7 @@ export function makeFub({ apiKey, system, systemKey }) {
     addNote: (personId, body, subject = 'Sistema de textos') =>
       http.post('/notes', { personId, subject, body }),
     logCall: (call) => http.post('/calls', call),
+    createTask: ({ personId, name, dueDate, type = 'Call' }) => http.post('/tasks', { personId, name, type, dueDate }),
   };
 }
 
