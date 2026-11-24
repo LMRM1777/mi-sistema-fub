@@ -52,7 +52,7 @@
       "name": "Leads: Facebook- (de CallAction)",
       "active": false,
       "lang": "en",
-      "trigger_tag": "drip-leads-facebook",
+      "trigger_tag": "callaction-18-original",
       "stop_on_reply": true,
       "source": "CallAction C18",
       "steps": [
@@ -1703,6 +1703,205 @@
             "unit": "días"
           },
           "text": "Assign New Follow Up Plan or Send to Bank"
+        }
+      ]
+    },
+    {
+      "id": "fb-leads-2026",
+      "name": "Leads de Facebook (2026, bilingüe)",
+      "active": false,
+      "fallback_lang": "es",
+      "trigger_tag": "drip-leads-facebook",
+      "stop_on_reply": true,
+      "source": "Reescrita en nov 2026 a partir de CallAction #18",
+      "steps": [
+        {
+          "after": {
+            "n": 2,
+            "unit": "minutos"
+          },
+          "type": "texto",
+          "es": "Lake Michigan Realty: ¡Hola {{contact_first_name}}! 😀 Soy {{user_first_name}}. Vi que pediste información de una casa en Facebook. ¿Te puedo llamar un momento hoy? Responde STOP para salir.",
+          "en": "Lake Michigan Realty: Hi {{contact_first_name}}! 😀 This is {{user_first_name}}. I saw you asked about a home on Facebook. Can I give you a quick call today? Reply STOP to opt out."
+        },
+        {
+          "after": {
+            "n": 1,
+            "unit": "minutos"
+          },
+          "type": "recordatorio",
+          "text": "📞 Lead nuevo de Facebook: llámalo YA (speed to lead) y anota qué casa vio."
+        },
+        {
+          "after": {
+            "n": 3,
+            "unit": "horas"
+          },
+          "type": "texto",
+          "es": "Lake Michigan Realty: ¿Quieres que te mande por email las casas nuevas que salgan en la zona que te gusta, apenas entren al MLS? ¿Cuál es tu mejor email? Responde STOP para salir.",
+          "en": "Lake Michigan Realty: Want me to email you new homes in the area you like as soon as they hit the MLS? What is your best email? Reply STOP to opt out."
+        },
+        {
+          "after": {
+            "n": 1,
+            "unit": "días"
+          },
+          "at": "10:00",
+          "type": "texto",
+          "es": "Lake Michigan Realty: Buenos días {{contact_first_name}} 😊 Una pregunta rápida: ¿vas a comprar con ITIN o con Seguro Social? Trabajamos con los dos y te conecto con el loan officer indicado. Responde STOP para salir.",
+          "en": "Lake Michigan Realty: Good morning {{contact_first_name}} 😊 Quick question: will you be buying with an ITIN or a Social Security number? We work with both and can connect you with the right loan officer. Reply STOP to opt out."
+        },
+        {
+          "after": {
+            "n": 1,
+            "unit": "días"
+          },
+          "at": "12:30",
+          "type": "texto",
+          "es": "Lake Michigan Realty: {{contact_first_name}}, ¿qué te gustó de la casa que viste? Si me dices zona, precio y cuartos, te busco otras parecidas. Responde STOP para salir.",
+          "en": "Lake Michigan Realty: {{contact_first_name}}, what did you like about the home you saw? Tell me the area, price and bedrooms and I will find similar ones. Reply STOP to opt out."
+        },
+        {
+          "after": {
+            "n": 1,
+            "unit": "días"
+          },
+          "type": "recordatorio",
+          "text": "📞 Segundo intento de llamada al lead de Facebook. Si no contesta, deja voicemail."
+        },
+        {
+          "after": {
+            "n": 2,
+            "unit": "días"
+          },
+          "at": "10:00",
+          "type": "texto",
+          "es": "Lake Michigan Realty: Si ves una casa que te guste, mándame la dirección y te agendo la visita. Así de fácil 🏡 Responde STOP para salir.",
+          "en": "Lake Michigan Realty: If you see a home you like, just text me the address and I will set up a showing. That easy 🏡 Reply STOP to opt out."
+        },
+        {
+          "after": {
+            "n": 4,
+            "unit": "días"
+          },
+          "at": "10:00",
+          "type": "texto",
+          "es": "Lake Michigan Realty: Hola {{contact_first_name}}, ¿sigues buscando casa? ¿Te ayudo con algo esta semana? Responde STOP para salir.",
+          "en": "Lake Michigan Realty: Hi {{contact_first_name}}, are you still looking for a home? Can I help with anything this week? Reply STOP to opt out."
+        },
+        {
+          "after": {
+            "n": 1,
+            "unit": "semanas"
+          },
+          "at": "10:00",
+          "type": "texto",
+          "es": "Lake Michigan Realty: Muchos compradores no saben cuánto pueden comprar hasta que hablan con un loan officer. ¿Quieres que te conecte para saberlo, sin compromiso? Responde STOP para salir.",
+          "en": "Lake Michigan Realty: Many buyers do not know how much home they can buy until they talk to a loan officer. Want me to connect you, no obligation? Reply STOP to opt out."
+        },
+        {
+          "after": {
+            "n": 1,
+            "unit": "semanas"
+          },
+          "type": "recordatorio",
+          "text": "📞 Llamada de seguimiento (2 semanas). Pregunta: ¿qué le falta para empezar a buscar en serio?"
+        },
+        {
+          "after": {
+            "n": 1,
+            "unit": "semanas"
+          },
+          "at": "10:00",
+          "type": "texto",
+          "es": "Lake Michigan Realty: {{contact_first_name}}, ¿qué te está deteniendo para comprar: el enganche, el crédito o encontrar la casa correcta? Dime y vemos opciones. Responde STOP para salir.",
+          "en": "Lake Michigan Realty: {{contact_first_name}}, what is holding you back from buying: the down payment, credit, or finding the right home? Tell me and we will look at options. Reply STOP to opt out."
+        },
+        {
+          "after": {
+            "n": 2,
+            "unit": "semanas"
+          },
+          "at": "10:00",
+          "type": "texto",
+          "es": "Lake Michigan Realty: Hola {{contact_first_name}} 😊 Paso a saludarte. ¿Cómo va tu búsqueda de casa? Responde STOP para salir.",
+          "en": "Lake Michigan Realty: Hi {{contact_first_name}} 😊 Just checking in. How is your home search going? Reply STOP to opt out."
+        },
+        {
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "at": "10:00",
+          "type": "texto",
+          "es": "Lake Michigan Realty: ¿Ya compraste casa o sigues buscando? Si sigues, mándame zona, precio y cuartos y te mando opciones nuevas. Responde STOP para salir.",
+          "en": "Lake Michigan Realty: Did you buy a home or are you still looking? If you are, text me the area, price and bedrooms and I will send new options. Reply STOP to opt out."
+        },
+        {
+          "after": {
+            "n": 2,
+            "unit": "días"
+          },
+          "type": "recordatorio",
+          "text": "📞 Llamada de 1 mes al lead de Facebook. Actualiza la etapa en FUB según lo que diga."
+        },
+        {
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "at": "10:00",
+          "type": "texto",
+          "es": "Lake Michigan Realty: {{contact_first_name}}, ¿te interesa saber cómo funciona comprar con ITIN o con asistencia de enganche (con Seguro Social)? Te explico en 5 minutos. Responde STOP para salir.",
+          "en": "Lake Michigan Realty: {{contact_first_name}}, want to know how buying with an ITIN or with down payment assistance (with a Social Security number) works? I can explain in 5 minutes. Reply STOP to opt out."
+        },
+        {
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "at": "10:00",
+          "type": "texto",
+          "es": "Lake Michigan Realty: Hola {{contact_first_name}}, aquí sigo para ayudarte cuando estés listo. ¿Sigues pensando en comprar este año? Responde STOP para salir.",
+          "en": "Lake Michigan Realty: Hi {{contact_first_name}}, I am still here to help when you are ready. Are you still thinking about buying this year? Reply STOP to opt out."
+        },
+        {
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "at": "10:00",
+          "type": "texto",
+          "es": "Lake Michigan Realty: Puedes ver todas las casas a la venta del MLS en www.homesearchmi.com 🔎 Si te gusta alguna, mándame la dirección. Responde STOP para salir.",
+          "en": "Lake Michigan Realty: You can see every home for sale on the MLS at www.homesearchmi.com 🔎 If you like one, text me the address. Reply STOP to opt out."
+        },
+        {
+          "after": {
+            "n": 3,
+            "unit": "días"
+          },
+          "type": "recordatorio",
+          "text": "📞 Llamada de 3 meses. Si ya compró con otro agente, márcalo en FUB y sácalo de la campaña."
+        },
+        {
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "at": "10:00",
+          "type": "texto",
+          "es": "Lake Michigan Realty: {{contact_first_name}}, ¿conoces a alguien que quiera comprar o vender casa? Con gusto le ayudamos 😊 Responde STOP para salir.",
+          "en": "Lake Michigan Realty: {{contact_first_name}}, do you know anyone who wants to buy or sell a home? We would be happy to help 😊 Reply STOP to opt out."
+        },
+        {
+          "after": {
+            "n": 1,
+            "unit": "meses"
+          },
+          "at": "10:00",
+          "type": "texto",
+          "es": "Lake Michigan Realty: Hola {{contact_first_name}}, no quiero molestarte. ¿Prefieres que te escriba más adelante, o ya no estás buscando casa? Responde STOP para salir.",
+          "en": "Lake Michigan Realty: Hi {{contact_first_name}}, I do not want to bother you. Should I check back later, or are you no longer looking for a home? Reply STOP to opt out."
         }
       ]
     }

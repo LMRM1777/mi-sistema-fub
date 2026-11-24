@@ -133,7 +133,7 @@ export function makeDrip({ repo, fub, sms, scheduler, config, env, notify = asyn
     }
 
     const step = campaign.steps[stepIndex];
-    const lang = campaign.lang || languageFor(person, config.rules);
+    const lang = campaign.lang || languageFor(person, config.rules, campaign.fallback_lang || 'en');
     const raw = step.text || step[lang] || step.es || step.en;
     const body = render(raw, person, env.agentName, { now, lang, tz: config.rules.timezone });
     enrollment.lastStepAt = now.toUTC().toISO();
